@@ -2,24 +2,19 @@ window.onload = init;
 
 var stage;
 var mole = new createjs.Bitmap("https://lh3.ggpht.com/7zGUqk6UlhZaE9mrIXT5gOYyUKLP7gY1lu3tPpGPI7v3TQWD311ryGjwWtQdLyj4OsDQ=w300");
-var hammer = new createjs.Bitmap("");
-
-
-
+// var hammer = new createjs.Bitmap("http://i254.photobucket.com/albums/hh96/nahsonchilll/982ba1e3-7b24-4be9-a460-0de66543bb1c_zps26e7bd46.png");
 
 function init(){
   stage = new createjs.Stage("board");
   stage.enableMouseOver();
   makeGameBoard();
   stage.cursor='crosshair';
-  document.onclick=bringDownHammer;
+  document.onclick=checkIfMole();
 };
 
-function bringDownHammer(){
-  hammer.x = 50;
-  hammer.y = 50;
-  updateStage();
-};
+// function bringDownHammer(){
+//   checkIfMole();
+// };
 
 function makeGameBoard(){
   drawMoleHoles();
@@ -48,6 +43,7 @@ function drawMoleHoles(){
 
     console.log(moleHole);
     moleHole.on("click",checkIfMole);
+    moleHole.id="mole-hole-"+i;
     stage.addChild(moleHole);
     updateStage();
   }
@@ -55,15 +51,21 @@ function drawMoleHoles(){
 };
 
 
-function checkIfMole(){
+function checkIfMole(evt){
+  console.log(evt.target);
+  if (evt.target.id=='mole-hole-1'){
+    whackMole();
+  }
   whackEmptySpace();
-  whackMole();
+
 };
 
 function whackMole(){
-
+    alert("you got it!");
 };
 
 function whackEmptySpace(){
-
+   // hammer.x = 50;
+  // stage.addChild(hammer)
+  // updateStage();
 };
